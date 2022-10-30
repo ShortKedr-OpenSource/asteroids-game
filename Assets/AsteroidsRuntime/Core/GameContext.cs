@@ -1,4 +1,6 @@
 using System;
+using Asteroids.Core.Interfaces;
+using Asteroids.Core.Interfaces.Processes;
 using UnityEngine;
 
 namespace Asteroids.Core
@@ -7,19 +9,23 @@ namespace Asteroids.Core
     {
         private LifeCycleContainer _container = new LifeCycleContainer();
 
+        private bool _wasInitialized = false;
+        
         private void Start()
         {
             StartGameContext();
-            var initializables = _container.Initializables;
+            var initializables = _container.Initializables.ToArray();
             foreach (var t in initializables)
             {
                 t.Initialize();
             }
+
+            _wasInitialized = true;
         }
 
         private void Update()
         {
-            var tickables = _container.Tickables;
+            var tickables = _container.Tickables.ToArray();
             foreach (var t in tickables)
             {
                 t.Tick();
@@ -48,11 +54,17 @@ namespace Asteroids.Core
         public void Bind(object obj)
         {
             _container.Bind(obj);
+            OnBind(obj);
+            
+            if (!_wasInitialized) return;
+            if (obj is IInitializable initializable) initializable.Initialize();
         }
 
         public void Unbind(object obj)
         {
             _container.Unbind(obj);
+            OnUnbind(obj);
+            //TODO implement dispose
         }
 
         public T FindObject<T>()
@@ -65,6 +77,16 @@ namespace Asteroids.Core
             return _container.GetObjects<T>();
         }
 
+        protected virtual void OnBind(object obj)
+        {
+            
+        }
+
+        protected virtual void OnUnbind(object obj)
+        {
+            
+        }
+        
         protected abstract void StartGameContext();
     }
 }

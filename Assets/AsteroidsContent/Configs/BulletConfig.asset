@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c84237904ef47ad951b93bd797524b1, type: 3}
+  m_Name: BulletConfig
+  m_EditorClassIdentifier: 
+  _viewPrefab: {fileID: 4474915930378078836, guid: d53968bde47666f499bd62281584a081, type: 3}
+  _bulletSpeed: 20
+  _damage: 50
+  _sizeRadius: 0.06

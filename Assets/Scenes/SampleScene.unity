@@ -168,11 +168,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shipConfig: {fileID: 11400000, guid: 506fe315c0595d14a961fa3ab8dc609f, type: 2}
+  _bulletConfig: {fileID: 11400000, guid: db64647ad92e6eb42b0aec6762a44dfb, type: 2}
+  _laserConfig: {fileID: 11400000, guid: f7cd7d05d72701e48a1470f78aac3e51, type: 2}
   _saucerConfigs: []
   _asteroidConfigs:
   - {fileID: 11400000, guid: fcd235dc1bba0b64dbe88e9060d11a46, type: 2}
   - {fileID: 11400000, guid: 024b31ddfbd939c4882257d66a2e53ae, type: 2}
   - {fileID: 11400000, guid: ba3d0d19ded471c4d90be4567b15bfe4, type: 2}
+  _gameCamera: {fileID: 519420031}
+  debugObjectSizes: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

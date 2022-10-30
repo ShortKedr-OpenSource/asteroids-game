@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Asteroids.Game.Utils
 {
-    public static class MathUtil
+    public static class MathHelper
     {
         public static Vector2 RotationToVector(float rotationDegree)
         {

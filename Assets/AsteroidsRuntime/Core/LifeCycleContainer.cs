@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Asteroids.Core.Interfaces;
+using Asteroids.Core.Interfaces.Processes;
 
 namespace Asteroids.Core
 {

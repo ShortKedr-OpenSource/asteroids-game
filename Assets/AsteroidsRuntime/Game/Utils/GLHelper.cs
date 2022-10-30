@@ -1,4 +1,6 @@
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Asteroids.Game.Utils
 {
@@ -34,6 +36,57 @@ namespace Asteroids.Game.Utils
                 GL.Vertex3(p0.x, p0.y, p0.z);
                 GL.Vertex3(p1.x, p1.y, p1.z);
             }
+
+            GL.End();
+            GL.PopMatrix();
+        }
+
+        public static void DrawBounds(Bounds bounds, Color color)
+        {
+            GL.PushMatrix();
+            Material.SetPass(0);
+            Material.color = color;
+            GL.Begin(GL.LINES);
+            GL.Color(color);
+
+            GL.Vertex3(bounds.min.x, bounds.min.y, bounds.min.z);
+            GL.Vertex3(bounds.min.x, bounds.max.y, bounds.min.z);
+            
+            GL.Vertex3(bounds.min.x, bounds.min.y, bounds.min.z);
+            GL.Vertex3(bounds.max.x, bounds.min.y, bounds.min.z);
+            
+            GL.Vertex3(bounds.min.x, bounds.min.y, bounds.min.z);
+            GL.Vertex3(bounds.min.x, bounds.min.y, bounds.max.z);
+            
+            GL.Vertex3(bounds.min.x, bounds.min.y, bounds.max.z);
+            GL.Vertex3(bounds.max.x, bounds.min.y, bounds.max.z);
+            
+            GL.Vertex3(bounds.min.x, bounds.min.y, bounds.max.z);
+            GL.Vertex3(bounds.min.x, bounds.max.y, bounds.max.z);
+            
+            GL.Vertex3(bounds.min.x, bounds.max.y, bounds.min.z);
+            GL.Vertex3(bounds.max.x, bounds.max.y, bounds.min.z);
+            
+            GL.Vertex3(bounds.min.x, bounds.max.y, bounds.max.z);
+            GL.Vertex3(bounds.max.x, bounds.max.y, bounds.max.z);
+            
+            GL.Vertex3(bounds.min.x, bounds.max.y, bounds.min.z);
+            GL.Vertex3(bounds.min.x, bounds.max.y, bounds.max.z);
+            
+            GL.Vertex3(bounds.max.x, bounds.max.y, bounds.max.z);
+            GL.Vertex3(bounds.max.x, bounds.min.y, bounds.max.z);
+            
+            GL.Vertex3(bounds.max.x, bounds.max.y, bounds.max.z);
+            GL.Vertex3(bounds.max.x, bounds.max.y, bounds.min.z);
+            
+            GL.Vertex3(bounds.max.x, bounds.max.y, bounds.min.z);
+            GL.Vertex3(bounds.max.x, bounds.max.y, bounds.min.z);
+            
+            GL.Vertex3(bounds.max.x, bounds.max.y, bounds.min.z);
+            GL.Vertex3(bounds.max.x, bounds.min.y, bounds.min.z);
+            
+            GL.Vertex3(bounds.max.x, bounds.min.y, bounds.min.z);
+            GL.Vertex3(bounds.max.x, bounds.min.y, bounds.max.z);
 
             GL.End();
             GL.PopMatrix();

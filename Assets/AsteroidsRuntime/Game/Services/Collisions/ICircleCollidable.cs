@@ -7,5 +7,6 @@ namespace Asteroids.Math.Collisions
     {
         public Vector2 CurrentPosition { get; }
         public float CurrentRadius { get; }
+        public void OnCollisionHappen(ICircleCollidable with);
     }
 }

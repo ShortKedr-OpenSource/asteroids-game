@@ -1,6 +1,10 @@
 using Asteroids.Core;
-using Asteroids.Game.Models;
 using Asteroids.Game.Utils;
+using Asteroids.Game.Entities.Asteroid;
+using Asteroids.Game.Entities.Bullet;
+using Asteroids.Game.Entities.CameraPortal;
+using Asteroids.Game.Entities.Saucer;
+using Asteroids.Game.Entities.Ship;
 using UnityEngine;
 
 namespace Asteroids.Game.Editor.Debug
@@ -19,6 +23,9 @@ namespace Asteroids.Game.Editor.Debug
         {
             Gizmos.color = Color.green;
 
+            var cameraPortal = _context.FindObject<CameraPortalModel>();
+            GLHelper.DrawBounds(cameraPortal.GetCameraPortalBounds(), Color.green);
+            
             var ships = _context.FindObjects<ShipModel>();
             foreach (var ship in ships)
             {
@@ -26,14 +33,18 @@ namespace Asteroids.Game.Editor.Debug
             }
 
             var asteroids = _context.FindObjects<AsteroidModel>();
-            UnityEngine.Debug.Log(asteroids.Length);
             foreach (var asteroid in asteroids)
             {
                 GLHelper.DrawCircle(asteroid.Position, asteroid.Config.SizeRadius, Color.green);
             }
+
+            var bullets = _context.FindObjects<BulletModel>();
+            foreach (var bullet in bullets)
+            {
+                GLHelper.DrawCircle(bullet.Position, bullet.Config.SizeRadius, Color.green);
+            }
             
             var saucers = _context.FindObjects<SaucerModel>();
-            var bullets = _context.FindObjects<BulletModel>();
         }
     }
 #endif
