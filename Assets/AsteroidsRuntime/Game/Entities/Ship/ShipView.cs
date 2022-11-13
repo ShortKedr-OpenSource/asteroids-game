@@ -7,9 +7,9 @@ namespace Asteroids.Game.Entities.Ship
         
         private bool _thrusterState = false;
         
-        public void SetRotation(float degrees)
+        public void SetRotation(float angle)
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, degrees));
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         public void SetPosition(Vector2 position)

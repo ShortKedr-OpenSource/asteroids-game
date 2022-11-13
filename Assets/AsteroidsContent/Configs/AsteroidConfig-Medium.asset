@@ -13,7 +13,16 @@ MonoBehaviour:
   m_Name: AsteroidConfig-Medium
   m_EditorClassIdentifier: 
   _viewPrefab: {fileID: 6853164827972887743, guid: 25580a5019e6843409a39825c7aead59, type: 3}
-  _separationConfigs: []
+  _separationConfigs:
+  - Configs:
+    - {fileID: 11400000, guid: fcd235dc1bba0b64dbe88e9060d11a46, type: 2}
+    - {fileID: 11400000, guid: fcd235dc1bba0b64dbe88e9060d11a46, type: 2}
+    - {fileID: 11400000, guid: fcd235dc1bba0b64dbe88e9060d11a46, type: 2}
+  - Configs:
+    - {fileID: 11400000, guid: fcd235dc1bba0b64dbe88e9060d11a46, type: 2}
+    - {fileID: 11400000, guid: fcd235dc1bba0b64dbe88e9060d11a46, type: 2}
+    - {fileID: 11400000, guid: fcd235dc1bba0b64dbe88e9060d11a46, type: 2}
+    - {fileID: 11400000, guid: fcd235dc1bba0b64dbe88e9060d11a46, type: 2}
   sizeRadius: 0.7
   _minSpeed: 2
   _maxSpeed: 4

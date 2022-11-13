@@ -8,5 +8,9 @@ namespace Asteroids.Game.Entities.Asteroid
         {
             transform.position = position;
         }
+
+        public void SetRotation(float angle) {
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
     }
 }

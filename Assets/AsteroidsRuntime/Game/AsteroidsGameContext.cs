@@ -68,8 +68,8 @@ namespace Asteroids.Game
             CameraPortalModel cameraPortalModel = new CameraPortalModel();
             cameraPortalModel.SetCamera(_gameCamera);
             Bind(cameraPortalModel);
-            
-            Debug.Log(_collisionService.CircleCollidables.Count);
+
+            Bind(_asteroidFactory); // TODO refactor to BindFactory
         }
 
         protected override void OnBind(object obj)
