@@ -1,3 +1,4 @@
+using System.Collections;
 using Asteroids.Core;
 using Asteroids.Game.Editor.Debug;
 using Asteroids.Game.Utils;
@@ -26,23 +27,37 @@ namespace Asteroids.Game
         
         [Header("Game Setup")]
         [SerializeField] private Camera _gameCamera;
-
+        [SerializeField] private float _asteroidSpawnRadius = 4f;
+        
         [Header("Debug")] 
         [SerializeField] private bool debugObjectSizes = true;
-        
-        private readonly ShipFactory _shipFactory = new ShipFactory();
-        private readonly SaucerFactory _saucerFactory = new SaucerFactory();
-        private readonly AsteroidFactory _asteroidFactory = new AsteroidFactory();
-        private readonly BulletFactory _bulletFactory = new BulletFactory();
-        private readonly LaserFactory _laserFactory = new LaserFactory();
 
-        private readonly CollisionService _collisionService = new CollisionService();
+        private readonly CollisionService _collisionService = new();
+
+        private readonly ShipFactory _shipFactory = new();
+        private readonly SaucerFactory _saucerFactory = new();
+        private readonly AsteroidFactory _asteroidFactory = new();
+        private readonly BulletFactory _bulletFactory = new();
+        private readonly LaserFactory _laserFactory = new();
         
         private DebugContextObjectSizes _sizesGizmoDrawer;
+        private Coroutine _saucerSpawnCoroutine;
 
         protected override void StartGameContext()
         {
-            Bind(_collisionService);
+            BindService(_collisionService);
+            
+            BindService(_shipFactory);
+            BindService(_saucerFactory);
+            BindService(_asteroidFactory);
+            BindService(_bulletFactory);
+            BindService(_laserFactory);
+            
+            CameraPortalModel cameraPortalModel = new CameraPortalModel();
+            cameraPortalModel.SetCamera(_gameCamera);
+            Bind(cameraPortalModel);
+
+            var cameraBounds = cameraPortalModel.GetCameraPortalBounds();
             
             ShipPresenter ship = _shipFactory.Create(new ShipFactoryParams()
             {
@@ -56,20 +71,21 @@ namespace Asteroids.Game
 
             for (int i = 0; i < 5; i++)
             {
+                
+                
                 AsteroidConfig config = _asteroidConfigs[Random.Range(0, _asteroidConfigs.Length)];
                 AsteroidPresenter asteroidPresenter = _asteroidFactory.Create(new AsteroidFactoryParams()
                 {
                     Context = this,
                     Config = config,
-                    Position = Vector2Helper.Random(new Vector2(-5, -5), new Vector2(5, 5))
+                    Position = Vector2Helper.RandomRadial(Vector2.zero, _asteroidSpawnRadius, 
+                        Mathf.Max(cameraBounds.size.x, cameraBounds.size.y))
                 });
             }
-            
-            CameraPortalModel cameraPortalModel = new CameraPortalModel();
-            cameraPortalModel.SetCamera(_gameCamera);
-            Bind(cameraPortalModel);
 
             Bind(_asteroidFactory); // TODO refactor to BindFactory
+
+            _saucerSpawnCoroutine = StartCoroutine(SaucerSpawnCoroutine());
         }
 
         protected override void OnBind(object obj)
@@ -87,6 +103,15 @@ namespace Asteroids.Game
             if (_sizesGizmoDrawer == null) _sizesGizmoDrawer = new DebugContextObjectSizes(this);
             if (debugObjectSizes) _sizesGizmoDrawer.DebugDrawSizesGizmo();
         }
+
+        IEnumerator SaucerSpawnCoroutine()
+        {
+            while (gameObject != null)
+            {
+                yield return new WaitForSeconds(5f); //TODO implement;
+            }
+        }
+        
         
     }
 }

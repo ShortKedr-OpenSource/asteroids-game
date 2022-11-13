@@ -176,6 +176,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 024b31ddfbd939c4882257d66a2e53ae, type: 2}
   - {fileID: 11400000, guid: ba3d0d19ded471c4d90be4567b15bfe4, type: 2}
   _gameCamera: {fileID: 519420031}
+  _asteroidSpawnRadius: 2
   debugObjectSizes: 1
 --- !u!1 &519420028
 GameObject:

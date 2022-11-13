@@ -5,8 +5,8 @@ namespace Asteroids.Math.Collisions
 {
     public class CollisionService : ITickable
     {
-        private List<ICircleCollidable> _circleCollidables = new List<ICircleCollidable>(64);
-        private HashSet<ICircleCollidable> _circleCollidablesHash = new HashSet<ICircleCollidable>();
+        private readonly List<ICircleCollidable> _circleCollidables = new List<ICircleCollidable>(64);
+        private readonly HashSet<ICircleCollidable> _circleCollidablesHash = new HashSet<ICircleCollidable>();
 
         public IReadOnlyList<ICircleCollidable> CircleCollidables => _circleCollidables;
 
