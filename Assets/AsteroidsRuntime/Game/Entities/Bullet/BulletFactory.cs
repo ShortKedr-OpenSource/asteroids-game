@@ -14,8 +14,6 @@ namespace Asteroids.Game.Entities.Bullet
             model.Position = p.Position;
 
             BulletView view = Object.Instantiate(config.ViewPrefab);
-            view.SetPosition(p.Position);
-            view.SetRotation(p.Direction);
 
             BulletPresenter presenter = new BulletPresenter(model, view, p.Context);
 

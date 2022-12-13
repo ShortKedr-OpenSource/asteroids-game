@@ -5,6 +5,7 @@ using Asteroids.Core.Interfaces.Processes;
 using Asteroids.Game.Entities.Asteroid;
 using Asteroids.Game.Entities.Bullet;
 using Asteroids.Game.Entities.CameraPortal;
+using Asteroids.Game.Entities.Laser;
 using Asteroids.Game.Utils;
 using Asteroids.Math.Collisions;
 using UnityEngine;
@@ -15,7 +16,8 @@ namespace Asteroids.Game.Entities.Ship
     public class ShipPresenter : ContextPresenter<ShipModel, ShipView>,
         IInitializable, ITickable, ICircleCollidable
     {
-        private readonly BulletFactory _bulletFactory = new();
+        private BulletFactory _bulletFactory;
+        private LaserFactory _laserFactory;
         private CameraPortalModel _cameraPortalModel;
 
         public ShipPresenter(ShipModel model, ShipView view, GameContext context)
@@ -26,6 +28,8 @@ namespace Asteroids.Game.Entities.Ship
         void IInitializable.Initialize()
         {
             _cameraPortalModel = Context.FindObject<CameraPortalModel>();
+            _bulletFactory = Context.FindService<BulletFactory>();
+            _laserFactory = Context.FindService<LaserFactory>();
         }
 
         void ITickable.Tick()
@@ -58,6 +62,24 @@ namespace Asteroids.Game.Entities.Ship
                     Context = Context,
                     Direction = Model.Rotation,
                     Position = Model.Position,
+                });
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Bounds portalBounds = _cameraPortalModel.GetCameraPortalBounds();
+                float rayLength = Mathf.Sqrt(portalBounds.size.x * portalBounds.size.x +
+                                             portalBounds.size.y * portalBounds.size.y);
+                
+                // TODO if can shoot laser => shot laser and decrease ammo acount;
+                
+                _laserFactory.Create(new LaserFactoryParams()
+                {
+                    Config = Model.LaserConfig,
+                    Context = Context,
+                    Direction = Model.Rotation,
+                    Origin = Model.Position,
+                    Length = rayLength,
                 });
             }
         }

@@ -16,6 +16,10 @@ namespace Asteroids.Game.Entities.Bullet
 
         private CameraPortalModel _cameraPortalModel;
 
+        Vector2 ICircleCollidable.CurrentPosition => Model.Position;
+        float ICircleCollidable.CurrentRadius => Model.Config.SizeRadius;
+        
+        
         public BulletPresenter(BulletModel model, BulletView view, GameContext context) 
             : base(model, view, context)
         {
@@ -33,7 +37,7 @@ namespace Asteroids.Game.Entities.Bullet
 
             ProcessCameraPortal();
             
-            UpdateView();
+            if (Model.ModelChanged) UpdateView();
         }
         
         private void ProcessCameraPortal()
@@ -50,7 +54,6 @@ namespace Asteroids.Game.Entities.Bullet
 
         private void UpdateView()
         {
-            if (!Model.ModelChanged) return;
             View.SetPosition(Model.Position);
         }
         
@@ -59,9 +62,7 @@ namespace Asteroids.Game.Entities.Bullet
             base.Dispose();
             if (View != null) Object.Destroy(View.gameObject);
         }
-
-        public Vector2 CurrentPosition => Model.Position;
-        public float CurrentRadius => Model.Config.SizeRadius;
+        
         public void OnCollisionHappen(ICircleCollidable with)
         {
             if (with is ShipPresenter) return;

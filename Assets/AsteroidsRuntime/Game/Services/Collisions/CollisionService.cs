@@ -3,6 +3,8 @@ using Asteroids.Core.Interfaces.Processes;
 
 namespace Asteroids.Math.Collisions
 {
+    // TODO add ray collidable
+    
     public class CollisionService : ITickable
     {
         private readonly List<ICircleCollidable> _circleCollidables = new List<ICircleCollidable>(64);
@@ -44,7 +46,7 @@ namespace Asteroids.Math.Collisions
                     if (circleCollidables[j] == null) continue;
                     if (!_circleCollidablesHash.Contains(circleCollidables[j])) continue;
 
-                    if (CollisionChecker.CheckCircleCollision(circleCollidables[i], circleCollidables[j])) {
+                    if (CollisionChecker.CheckCollision(circleCollidables[i], circleCollidables[j])) {
                         circleCollidables[i].OnCollisionHappen(circleCollidables[j]);
                         circleCollidables[j].OnCollisionHappen(circleCollidables[i]);
                     }
