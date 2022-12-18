@@ -4,6 +4,7 @@ using Asteroids.Core.Interfaces.Processes;
 using Asteroids.Game.Entities.Bullet;
 using Asteroids.Game.Entities.CameraPortal;
 using Asteroids.Math.Collisions;
+using Asteroids.Math.Collisions.Collidables;
 using UnityEngine;
 
 namespace Asteroids.Game.Entities.Asteroid
@@ -71,8 +72,8 @@ namespace Asteroids.Game.Entities.Asteroid
             if (View != null) Object.Destroy(View.gameObject);
         }
 
-        public Vector2 CurrentPosition => Model.Position;
-        public float CurrentRadius => Model.Config.SizeRadius;
+        public Vector2 Position => Model.Position;
+        public float Radius => Model.Config.SizeRadius;
 
         public void OnCollisionHappen(ICircleCollidable with)
         {

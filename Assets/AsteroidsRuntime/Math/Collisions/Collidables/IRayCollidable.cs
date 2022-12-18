@@ -1,12 +1,12 @@
 using UnityEngine;
 
-namespace Asteroids.Math.Collisions
+namespace Asteroids.Math.Collisions.Collidables
 {
 
     public interface IRayCollidable : ICollidable<ICircleCollidable>, ICollidable<IRayCollidable>
     {
         public Vector2 Origin { get; }
-        public float Length { get; }
+        public Vector2 Direction { get; }
         public float Thickness { get; }
     }
 

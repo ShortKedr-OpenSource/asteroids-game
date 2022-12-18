@@ -6,6 +6,7 @@ using Asteroids.Game.Entities.Asteroid;
 using Asteroids.Game.Entities.CameraPortal;
 using Asteroids.Game.Entities.Ship;
 using Asteroids.Math.Collisions;
+using Asteroids.Math.Collisions.Collidables;
 using UnityEngine;
 
 namespace Asteroids.Game.Entities.Bullet
@@ -16,8 +17,8 @@ namespace Asteroids.Game.Entities.Bullet
 
         private CameraPortalModel _cameraPortalModel;
 
-        Vector2 ICircleCollidable.CurrentPosition => Model.Position;
-        float ICircleCollidable.CurrentRadius => Model.Config.SizeRadius;
+        Vector2 ICircleCollidable.Position => Model.Position;
+        float ICircleCollidable.Radius => Model.Config.SizeRadius;
         
         
         public BulletPresenter(BulletModel model, BulletView view, GameContext context) 

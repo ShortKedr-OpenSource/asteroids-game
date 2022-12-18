@@ -3,6 +3,7 @@ using Asteroids.Core;
 using Asteroids.Core.Abstract;
 using Asteroids.Core.Interfaces.Processes;
 using Asteroids.Math.Collisions;
+using Asteroids.Math.Collisions.Collidables;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -15,7 +16,7 @@ namespace Asteroids.Game.Entities.Laser
         private float _timer;
 
         Vector2 IRayCollidable.Origin => Model.Origin;
-        float IRayCollidable.Length => Model.Length;
+        public Vector2 Direction => default; // TODO implement
         float IRayCollidable.Thickness => Model.Config.Thickness;
 
         public LaserPresenter(LaserModel model, LaserView view, GameContext context)
