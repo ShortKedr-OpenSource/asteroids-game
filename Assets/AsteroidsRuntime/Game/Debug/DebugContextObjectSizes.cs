@@ -3,8 +3,10 @@ using Asteroids.Game.Utils;
 using Asteroids.Game.Entities.Asteroid;
 using Asteroids.Game.Entities.Bullet;
 using Asteroids.Game.Entities.CameraPortal;
+using Asteroids.Game.Entities.Laser;
 using Asteroids.Game.Entities.Saucer;
 using Asteroids.Game.Entities.Ship;
+using UnityEditor.Graphs;
 using UnityEngine;
 
 namespace Asteroids.Game.Editor.Debug
@@ -42,6 +44,17 @@ namespace Asteroids.Game.Editor.Debug
             foreach (var bullet in bullets)
             {
                 GLHelper.DrawCircle(bullet.Position, bullet.Config.SizeRadius, Color.green);
+            }
+
+            var lasers = _context.FindObjects<LaserModel>();
+            foreach (var laser in lasers)
+            {
+                Vector2 direction = new Vector2()
+                {
+                    x = Mathf.Cos(laser.Direction * Mathf.Deg2Rad) * laser.Length,
+                    y = Mathf.Sin(laser.Direction * Mathf.Deg2Rad) * laser.Length,
+                };
+                GLHelper.DrawThickRay2D(laser.Origin, direction, laser.Config.Thickness, Color.green);
             }
             
             var saucers = _context.FindObjects<SaucerModel>();

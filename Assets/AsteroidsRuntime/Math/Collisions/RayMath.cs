@@ -11,8 +11,38 @@ namespace Asteroids.Math.Collisions
     {
         public static bool RayIntersection(IRayCollidable first, IRayCollidable second, out Vector2 firstIntersectionPoint)
         {
-            // Make 4 flat rays, collect intersections;
-            throw new NotImplementedException();
+            var firstOrigin = first.Origin;
+            var secondOrigin = second.Origin;
+            
+            var firstDir = first.Direction;
+            var secondDir = second.Direction;
+            
+            float firstHalfThickness = first.Thickness / 2f;
+            float secondHalfThickness = second.Thickness / 2f;
+            
+            Vector2 firstNormal = new Vector2(-firstDir.y, firstDir.x).normalized;
+            Vector2 secondNormal = new Vector2(-secondDir.y, secondDir.x).normalized;
+
+            Vector2 firstOriginLeft = firstOrigin + firstNormal * firstHalfThickness;
+            Vector2 firstOriginRight = firstOrigin - firstNormal * firstHalfThickness;  
+            
+            Vector2 secondOriginLeft = secondOrigin + secondNormal * secondHalfThickness;
+            Vector2 secondOriginRight = secondOrigin - secondNormal * secondHalfThickness;
+
+            FlatRay firstLeftRay = new FlatRay(firstOriginLeft, firstDir);
+            FlatRay firstRightRay = new FlatRay(firstOriginRight, firstDir);
+
+            FlatRay secondLeftRay = new FlatRay(secondOriginLeft, secondDir);
+            FlatRay secondRightRay = new FlatRay(secondOriginRight, secondDir);
+
+            bool intersectionOne = FlatRayIntersection(firstLeftRay, secondRightRay, out Vector2 intersectionPointOne);
+            bool intersectionTwo = FlatRayIntersection(firstRightRay, secondLeftRay, out Vector2 intersectionPointTwo);
+
+            if (intersectionOne) firstIntersectionPoint = intersectionPointOne;
+            else if (intersectionTwo) firstIntersectionPoint = intersectionPointTwo;
+            else firstIntersectionPoint = Vector2.zero;
+
+            return intersectionOne || intersectionTwo;
         }
 
         public static bool FlatRayIntersection(FlatRay first, FlatRay second, out Vector2 intersectionPoint)

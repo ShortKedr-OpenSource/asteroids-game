@@ -15,5 +15,5 @@ MonoBehaviour:
   _viewPrefab: {fileID: 2410669214254277089, guid: b071394680f43044b87a9a86dc51d9e4, type: 3}
   _maxAmmo: 3
   _ammoRechargeTime: 10
-  thickness: 0
-  _lifeTime: 0.1
+  thickness: 0.1
+  _lifeTime: 10
