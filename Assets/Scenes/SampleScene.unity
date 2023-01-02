@@ -207,10 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267409ed0b734529a0f7c29e29dcccf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstOrigin: {x: 0, y: 0}
-  FirstDirection: {x: -3.73, y: 7.81}
-  SecondOrigin: {x: -2.46, y: -0.22}
-  SecondDirection: {x: 6.65, y: 7.59}
+  FirstOrigin: {x: -23.64, y: 1.77}
+  FirstDirection: {x: 14.9, y: 7.53}
+  SecondOrigin: {x: -16.48, y: 16.36}
+  SecondDirection: {x: 17.42, y: -15.2}
 --- !u!4 &128433837
 Transform:
   m_ObjectHideFlags: 0
