@@ -63,7 +63,7 @@ namespace Asteroids.Math.Collisions
                     if (circleCollidables[j] == null) continue;
                     if (!_circleCollidablesHash.Contains(circleCollidables[j])) continue;
 
-                    if (CollisionChecker.CheckCollision(circleCollidables[i], circleCollidables[j])) {
+                    if (CollisionMath.CheckCollision(circleCollidables[i], circleCollidables[j])) {
                         circleCollidables[i].OnCollisionHappen(circleCollidables[j]);
                         circleCollidables[j].OnCollisionHappen(circleCollidables[i]);
                     }
@@ -81,7 +81,7 @@ namespace Asteroids.Math.Collisions
                     if (rayCollidables[j] == null) continue;
                     if (!_rayCollidablesHash.Contains(rayCollidables[j])) continue;
 
-                    if (CollisionChecker.CheckCollision(rayCollidables[i], rayCollidables[j])) {
+                    if (CollisionMath.CheckCollision(rayCollidables[i], rayCollidables[j])) {
                         rayCollidables[i].OnCollisionHappen(rayCollidables[j]);
                         rayCollidables[j].OnCollisionHappen(rayCollidables[i]);
                     }
@@ -99,7 +99,7 @@ namespace Asteroids.Math.Collisions
                     if (rayCollidables[j] == null) continue;
                     if (!_rayCollidablesHash.Contains(rayCollidables[j])) continue;
 
-                    if (CollisionChecker.CheckCollision(circleCollidables[i], rayCollidables[j])) {
+                    if (CollisionMath.CheckCollision(circleCollidables[i], rayCollidables[j])) {
                         circleCollidables[i].OnCollisionHappen(rayCollidables[j]);
                         rayCollidables[j].OnCollisionHappen(circleCollidables[i]);
                     }
