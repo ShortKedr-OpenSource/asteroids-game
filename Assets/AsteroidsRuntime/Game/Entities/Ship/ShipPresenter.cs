@@ -138,7 +138,7 @@ namespace Asteroids.Game.Entities.Ship
         public Vector2 Position => Model.Position;
         public float Radius => Model.ShipConfig.SizeRadius;
 
-        public void OnCollisionHappen(ICircleCollidable with)
+        public void OnCollisionHappen(ICollidable with)
         {
             if (with is AsteroidPresenter) Dispose();
         }

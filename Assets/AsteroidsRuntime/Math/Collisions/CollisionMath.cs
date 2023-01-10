@@ -1,8 +1,7 @@
-using System;
 using System.Runtime.CompilerServices;
 using Asteroids.Math.Collisions.Collidables;
+using Asteroids.Math.Collisions.Shapes;
 using UnityEngine;
-using Ray = Asteroids.Math.Collisions.Shapes.Ray;
 
 namespace Asteroids.Math.Collisions
 {
@@ -25,8 +24,24 @@ namespace Asteroids.Math.Collisions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool CheckCollision(ICircleCollidable first, IRayCollidable second)
         {
-            Ray normalRay = default; // TODO implement;
-            return RayMath.RayIntersection(normalRay, second, out _);
+            Vector2 origin = second.Origin;
+            Vector2 direction = second.Direction;
+            Vector2 normal = new Vector2(-direction.y, direction.x).normalized;
+            float halfThickness = second.Thickness / 2f;
+            
+            Vector2 originLeft = origin + normal * halfThickness;
+            Vector2 originRight = origin - normal * halfThickness;
+
+            FlatRay leftRay = new FlatRay(originLeft, direction);
+            FlatRay rightRay = new FlatRay(originRight, direction);
+                
+            FlatRay circleLeftRay = new FlatRay(first.Position, normal * first.Radius);
+            FlatRay circleRightRay = new FlatRay(first.Position, -normal * first.Radius);
+
+            bool intersectionOne = RayMath.FlatRayIntersection(leftRay, circleRightRay, out var p1);
+            bool intersectionTwo = RayMath.FlatRayIntersection(rightRay, circleLeftRay, out var p2);
+
+            return intersectionTwo || intersectionOne;
         }
     }
 

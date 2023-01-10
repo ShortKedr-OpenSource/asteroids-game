@@ -16,13 +16,13 @@ namespace Asteroids.Math.Collisions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool CheckCollision(IRayCollidable first, IRayCollidable second)
         {
-            throw new NotImplementedException();
+            return CollisionMath.CheckCollision(first, second);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool CheckCollision(ICircleCollidable first, IRayCollidable second)
         {
-            throw new NotImplementedException();
+            return CollisionMath.CheckCollision(first, second);
         }
     }
 }

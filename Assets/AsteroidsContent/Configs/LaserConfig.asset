@@ -16,4 +16,4 @@ MonoBehaviour:
   _maxAmmo: 3
   _ammoRechargeTime: 10
   thickness: 0.1
-  _lifeTime: 10
+  _lifeTime: 0.1

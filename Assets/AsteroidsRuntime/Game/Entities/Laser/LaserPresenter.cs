@@ -9,14 +9,18 @@ using Object = UnityEngine.Object;
 
 namespace Asteroids.Game.Entities.Laser
 {
+
     public class LaserPresenter : ContextPresenter<LaserModel, LaserView>,
         IInitializable, ITickable, IRayCollidable
     {
-
         private float _timer;
 
         Vector2 IRayCollidable.Origin => Model.Origin;
-        public Vector2 Direction => default; // TODO implement
+
+        public Vector2 Direction =>
+            new Vector2(Mathf.Cos(Model.Direction * Mathf.Deg2Rad), Mathf.Sin(Model.Direction * Mathf.Deg2Rad)) *
+            Model.Length;
+
         float IRayCollidable.Thickness => Model.Config.Thickness;
 
         public LaserPresenter(LaserModel model, LaserView view, GameContext context)
@@ -34,7 +38,7 @@ namespace Asteroids.Game.Entities.Laser
         {
             if (_timer >= Model.Config.LifeTime) Dispose();
             _timer += Time.deltaTime;
-            
+
             if (Model.ModelChanged) UpdateView();
         }
 
@@ -44,16 +48,17 @@ namespace Asteroids.Game.Entities.Laser
             View.SetDirection(Model.Direction);
             View.SetLength(Model.Length);
         }
-        
+
         public override void Dispose()
         {
             base.Dispose();
             if (View != null) Object.Destroy(View.gameObject);
         }
 
-        public void OnCollisionHappen(ICircleCollidable with)
+        public void OnCollisionHappen(ICollidable with)
         {
-            throw new NotImplementedException();
+            Debug.Log($"{with}");
         }
     }
+
 }

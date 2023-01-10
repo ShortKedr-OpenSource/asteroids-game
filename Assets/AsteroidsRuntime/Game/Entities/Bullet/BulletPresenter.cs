@@ -64,7 +64,7 @@ namespace Asteroids.Game.Entities.Bullet
             if (View != null) Object.Destroy(View.gameObject);
         }
         
-        public void OnCollisionHappen(ICircleCollidable with)
+        public void OnCollisionHappen(ICollidable with)
         {
             if (with is ShipPresenter) return;
             if (with is BulletPresenter) return;

@@ -3,6 +3,7 @@ using Asteroids.Core.Abstract;
 using Asteroids.Core.Interfaces.Processes;
 using Asteroids.Game.Entities.Bullet;
 using Asteroids.Game.Entities.CameraPortal;
+using Asteroids.Game.Entities.Laser;
 using Asteroids.Math.Collisions;
 using Asteroids.Math.Collisions.Collidables;
 using UnityEngine;
@@ -66,6 +67,22 @@ namespace Asteroids.Game.Entities.Asteroid
             View.SetPosition(Model.Position);
         }
 
+        private void SeparationDispose()
+        {
+            var separationConfigs = Model.SeparationConfigs;
+            for (int i = 0; i < separationConfigs.Length; i++)
+            {
+                _asteroidFactory.Create(new AsteroidFactoryParams()
+                {
+                    Config = separationConfigs[i],
+                    Context = Context,
+                    Position = Model.Position,
+                });
+            }
+
+            Dispose();
+        }
+        
         public override void Dispose()
         {
             base.Dispose();
@@ -75,22 +92,18 @@ namespace Asteroids.Game.Entities.Asteroid
         public Vector2 Position => Model.Position;
         public float Radius => Model.Config.SizeRadius;
 
-        public void OnCollisionHappen(ICircleCollidable with)
+        public void OnCollisionHappen(ICollidable with)
         {
             if (with is BulletPresenter bullet)
             {
-                var separationConfigs = Model.SeparationConfigs;
-                for (int i = 0; i < separationConfigs.Length; i++)
-                {
-                    _asteroidFactory.Create(new AsteroidFactoryParams()
-                    {
-                        Config = separationConfigs[i],
-                        Context = Context,
-                        Position = Model.Position,
-                    });
-                }
+                SeparationDispose();
+                return;
+            }
 
-                Dispose();
+            if (with is LaserPresenter laser)
+            {
+                SeparationDispose();
+                return;
             }
         }
     }
